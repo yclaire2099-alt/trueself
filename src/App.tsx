@@ -290,31 +290,22 @@ const ProductDefinition = () => {
     },
     {
       title: "影响力放大",
-      desc: "让你的表达、判断与风格突破时间和精力限制。",
-      icon: <TrendingUp className="text-purple-500" />
+      desc: "让你的判断力在不同场景中并行工作，实现影响力的指数级放大。",
+      icon: <Zap className="text-yellow-500" />
     },
     {
-      title: "组织可传承",
-      desc: "让个人能力不只属于个人，而成为组织长期可复利的能力底座。",
-      icon: <Users className="text-green-500" />
+      title: "组织传承",
+      desc: "将关键人物的决策模型转化为组织资产，不因人员流动而流失。",
+      icon: <Target className="text-purple-500" />
     }
   ];
 
   return (
     <section id="value" className="section-padding">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">
-            真我 Agent，不是聊天机器人，<br />而是你的认知分身系统。
-          </h2>
-          <p className="text-neutral-500 max-w-2xl mx-auto">
-            它不只是学习你说过什么，更重要的是学习你是谁、你相信什么、你如何看世界。
-          </p>
-        </div>
-
         <div className="grid md:grid-cols-3 gap-8">
           {cards.map((card, i) => (
-            <motion.div
+            <motion.div 
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -353,34 +344,27 @@ const WhyNow = () => {
     },
     {
       title: "认知资产会成为新的核心资产",
-      desc: "未来最值钱的，不只是数据、流量和渠道，更是代表你独特判断与风格的认知资产。"
+      desc: "未来最值钱的，不只是数据、流量，而是能对这些数据进行高质量判断的认知模型。"
     }
   ];
 
   return (
-    <section className="section-padding bg-black text-white overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 blur-[150px] -z-0" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id="why" className="section-padding bg-black text-white">
+      <div className="max-w-7xl mx-auto">
         <div className="mb-20">
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8">为什么是现在？</h2>
-          <p className="text-neutral-400 text-xl">AI 的竞争，已经从“效率工具”进入“认知竞争”阶段。</p>
+          <h2 className="text-3xl md:text-7xl font-serif font-bold tracking-tighter">
+            为什么是现在？
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((reason, i) => (
-            <div key={i} className="p-8 border border-white/10 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-              <div className="text-blue-500 font-mono text-4xl mb-6">0{i+1}</div>
-              <h3 className="text-xl font-bold mb-4">{reason.title}</h3>
-              <p className="text-neutral-400 text-sm leading-relaxed">{reason.desc}</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {reasons.map((r, i) => (
+            <div key={i} className="p-8 border border-neutral-800 rounded-3xl hover:bg-neutral-900 transition-colors">
+              <div className="text-neutral-500 font-mono mb-8">0{i+1}</div>
+              <h3 className="text-xl font-bold mb-4">{r.title}</h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">{r.desc}</p>
             </div>
           ))}
-        </div>
-
-        <div className="mt-20 pt-10 border-t border-white/10 text-center">
-          <p className="text-2xl font-serif italic">
-            "真我 Agent，帮助你把“你自己”，变成 AI 时代最值得长期积累的资产。"
-          </p>
         </div>
       </div>
     </section>
@@ -496,36 +480,47 @@ const Visualization = ({ isDark }: { isDark: boolean }) => {
           // Initialize mermaid with current theme
           mermaid.initialize({ 
             startOnLoad: false, 
-            theme: isDark ? 'dark' : 'neutral',
+            theme: 'base',
+            themeVariables: {
+              fontFamily: 'Noto Serif SC',
+              fontSize: '15px',
+              primaryColor: '#C5A365',
+              primaryTextColor: '#ffffff',
+              secondaryColor: '#C5A3651A',
+              secondaryTextColor: '#ffffff',
+              tertiaryColor: '#C5A365',
+              tertiaryTextColor: '#ffffff',
+              primaryBorderColor: '#C5A365',
+              lineColor: '#C5A365',
+              textColor: '#ffffff',
+              mainBkg: 'transparent',
+              nodeBorder: '#C5A365',
+              clusterBkg: 'transparent',
+              clusterBorder: '#C5A365',
+              edgeLabelBackground: 'transparent',
+              nodeTextColor: '#ffffff'
+            },
             securityLevel: 'loose',
-            fontFamily: 'inherit'
           });
 
           const id = `mermaid-svg-${Math.random().toString(36).substring(2, 11)}`;
           const { svg } = await mermaid.render(id, `
             graph TD
-              A[真我 Agent 核心架构] --> B(底层: 价值观与身份)
-              A --> C(中层: 决策逻辑与观察模型)
-              A --> D(表层: 表达风格与语言习惯)
+              Human["👤 关键人物 (人类本体)"] --> |结构化访谈与语料提炼| Core{"真我 Agent 五层架构"}
               
-              B --> B1[使命感]
-              B --> B2[底线原则]
+              Core --> Heart["❤️ 一层：价值观与身份对齐"]
+              Core --> Eye["👁️ 二层：趋势敏感度建模"]
+              Core --> Brain["🧠 三层：决策逻辑与权衡"]
+              Core --> Mouth["💬 四层：语言风格复现"]
+              Core --> Shield["🛡️ 五层：边界与风险约束"]
               
-              C --> C1[判断标准]
-              C --> C2[权衡逻辑]
+              Heart & Eye & Brain & Mouth & Shield --> Twin["♾️ 高保真数字分身"]
+              Twin --> Asset["💎 跨越物理时间的组织认知资产"]
               
-              D --> D1[词汇偏好]
-              D --> D2[说服路径]
+              classDef default fill:none,stroke:#C5A365,stroke-width:1px,rx:8px,ry:8px;
+              classDef primary fill:#C5A3651A,stroke:#C5A365,stroke-width:2px,rx:8px,ry:8px;
               
-              E[输入: 语料/访谈/决策案例] --> A
-              A --> F[输出: 认知资产/影响力放大/组织传承]
-
-              style A fill:#3b82f6,stroke:#3b82f6,color:#fff
-              style B fill:#60a5fa,stroke:#3b82f6,color:#fff
-              style C fill:#60a5fa,stroke:#3b82f6,color:#fff
-              style D fill:#60a5fa,stroke:#3b82f6,color:#fff
-              style E fill:#10b981,stroke:#059669,color:#fff
-              style F fill:#8b5cf6,stroke:#7c3aed,color:#fff
+              class Human,Asset primary;
           `);
           chartRef.current.innerHTML = svg;
         } catch (error) {
@@ -541,11 +536,20 @@ const Visualization = ({ isDark }: { isDark: boolean }) => {
   }, [isDark]);
 
   return (
-    <section className="section-padding">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-serif font-bold mb-12">系统架构可视化</h2>
-        <div className="p-8 bg-white dark:bg-neutral-800 rounded-3xl border dark:border-neutral-700 shadow-inner overflow-x-auto flex justify-center items-center min-h-[400px]">
-          <div ref={chartRef} className="w-full" />
+    <section id="how" className="py-24 bg-neutral-900 text-white dark:bg-black transition-colors duration-500 overflow-hidden relative">
+      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#C5A365 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+      
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-5xl font-bold mb-6">五层漏斗认知架构</h2>
+          <p className="text-neutral-400 max-w-2xl mx-auto font-light">
+            如何构建“像你”的数字分身？我们从底层价值观到表层表达，建立了一套严格的系统架构。
+          </p>
+        </div>
+
+        {/* Mermaid 关系图 */}
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-8 flex justify-center overflow-x-auto">
+          <div ref={chartRef} className="text-center w-full min-w-[600px]" />
         </div>
       </div>
     </section>
@@ -742,9 +746,9 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               <h3 className="text-2xl font-serif font-bold mb-2">预约专属演示</h3>
               <p className="text-neutral-500 text-sm mb-8">扫描二维码或通过以下方式联系我们</p>
               
-              <div className="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl mb-8 flex justify-center">
+                <div className="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl mb-8 flex justify-center">
                 <img 
-                  src="/meme.jpj" 
+                  src="/qrcode.png" 
                   alt="Contact QR Code" 
                   className="w-48 h-48 object-contain"
                   referrerPolicy="no-referrer"
